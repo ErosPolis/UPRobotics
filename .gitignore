@@ -1,0 +1,4 @@
+/venv/
+/.idea/
+.DS_Store
+teleop/__pycache__/xbox.cpython-36.pyc
