@@ -218,7 +218,6 @@ class Ui_MainWindow(object):
         BYTES = pack('BBBBBB',0,i,1,int(v/254+1),int(v%254+1),255)
         try:
             self.sock.sendto(BYTES, (UDP_IP, UDP_PORT))
-            #ser.write(BYTES)
             s = unpack ('BBBBBB',BYTES)
             self.statusbar.showMessage(str(s),5000)
         except:
@@ -368,12 +367,7 @@ class Ui_MainWindow(object):
                 #BYTES = pack('BBBBBBBBBBBBB',0 ,1,toM(m2),1,toM(m1), toM(joy.rightX()) ,toM(joy.rightY()),Bt(joy.X(),joy.B(),4),Bt(joy.Y(),joy.A(),1),toM(joy.rightTrigger()-joy.leftTrigger()),Bt(joy.dpadDown(),joy.dpadUp(),1),Bt(joy.dpadLeft(),joy.dpadRight(),1),128)
 
 
-#Pad izquierdo adelante atrás y vuelta.
-#Manipulación: Mover abajo o arriba las ruedas
-#D-Pad brazo izquierda, derecha, atras, adelante.
-#RB, LB: Abrir y cerrar mano.
-#Pad derecho: dar vueltas a mano.
-#Trigger izquierdo y derecho: girar brazo
+
 '''
 Normal:
 Joystick derecho: Mover adelante, atrás, izquierda y derecha.
