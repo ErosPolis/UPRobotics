@@ -9,7 +9,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-import cv2
+# import cv2
 import socket
 import xbox
 import time
@@ -28,13 +28,13 @@ MESSAGE = "HI"
 
 datos = ""
 
-#ser = serial.Serial(
+# ser = serial.Serial(
 #	port='/dev/ttyUSB0',
 #	baudrate=38400,
 #	parity=serial.PARITY_NONE,
 #	stopbits=serial.STOPBITS_ONE,
 #	bytesize=serial.EIGHTBITS
-#)
+# )
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -44,50 +44,64 @@ except AttributeError:
 
 try:
     _encoding = QtGui.QApplication.UnicodeUTF8
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+    if v > 0:
+        return int(abs(v) * 1000)
+
+
+def _translate(context, text, disambig):
+    return QtGui.QApplication.translate(context, text, disambig, _encoding)
+
 except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+
+
+def _translate(context, text, disambig):
+    return QtGui.QApplication.translate(context, text, disambig)
+
 
 def toM(v):
-    if v > 0:
-        return int(abs(v)*1000)
     if v < 0:
-        return int(abs(v)*999+1001)
+        return int(abs(v) * 999 + 1001)
     if v == 0:
-        return int(2) #falta ver aqui que valor mandar
+        return int(2)  # falta ver aqui que valor mandar
 
-def Bt(a,b,z):
-    if a and not b: return int(1000/z)
-    elif b: return int( (1001+(1000/z)) )
-    else : return int(2) #falta ver aqui que valor mandar
 
-def St( x,y ):
-    ny = abs(y)-abs(x*y)
+def Bt(a, b, z):
+    if a and not b:
+        return int(1000 / z)
+    elif b:
+        return int((1001 + (1000 / z)))
+    else:
+        return int(2)  # falta ver aqui que valor mandar
+
+
+def St(x, y):
+    ny = abs(y) - abs(x * y)
     a = abs(ny) + abs(x)
     b = abs(y) - abs(x)
     if y < 0:
-        a=-a #espejeamos la funcion
-        b=-b
-        n =b
-        b=a
-        a=n
-    if x < 0: return (b,a)
-    else: return (a,b)
+        a = -a  # espejeamos la funcion
+        b = -b
+        n = b
+        b = a
+        a = n
+    if x < 0:
+        return (b, a)
+    else:
+        return (a, b)
 
 
 class MyWindow(QtGui.QMainWindow):
-    def closeEvent(self,event):
+    def closeEvent(self, event):
         joy.close()
         event.accept()
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(1200, 675)
 
-    # creating a basic vlc instance
+        # creating a basic vlc instance
         self.instance = vlc.Instance()
         # creating an empty vlc media player
         self.mediaplayer = self.instance.media_player_new()
@@ -141,21 +155,21 @@ class Ui_MainWindow(object):
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1200, 25))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         MainWindow.setMenuBar(self.menubar)
-        self.timerC = QtCore.QTimer() #Inicializacion del timer
+        self.timerC = QtCore.QTimer()  # Inicializacion del timer
         self.timerC.setSingleShot(False)
         self.timerC.timeout.connect(self.camerat)
         self.timerC.start(100)
-        self.timerD = QtCore.QTimer() #Inicializacion del timer
+        self.timerD = QtCore.QTimer()  # Inicializacion del timer
         self.timerD.setSingleShot(False)
         self.timerD.timeout.connect(self.form_t)
         self.sensor = ""
         self.timerD.start(10)
-        self.timerJ = QtCore.QTimer() #Inicializacion del timer
+        self.timerJ = QtCore.QTimer()  # Inicializacion del timer
         self.timerJ.setSingleShot(False)
         self.timerJ.timeout.connect(self.joyupdate_t)
         self.joyv = 0
-        #ser.open()
-        #self.timerJ.start(10)
+        # ser.open()
+        # self.timerJ.start(10)
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
         MainWindow.setStatusBar(self.statusbar)
@@ -173,12 +187,12 @@ class Ui_MainWindow(object):
     def form_t(self):
         if self.initsensor == 0:
             try:
-                #self.sock1 = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+                # self.sock1 = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
                 server_address = ("192.168.1.5", 5000)
-                #self.sock1.bind(server_address)
-                #self.initsensor = 1
+            # self.sock1.bind(server_address)
+            # self.initsensor = 1
             except:
-                self.statusbar.showMessage("Error sensor",5000)
+                self.statusbar.showMessage("Error sensor", 5000)
         else:
             try:
                 data, add = self.sock1.recvfrom(1024)
@@ -191,38 +205,39 @@ class Ui_MainWindow(object):
                             self.datos = self.datos
                         else:
                             self.sensor = self.datos
-                            print self.datos
+                            print
+                            self.datos
                     else:
                         self.datos = str(temp)
             except:
-                    self.statusbar.showMessage("Error sensor",5000)
+                self.statusbar.showMessage("Error sensor", 5000)
         if self.sensor != "":
             cos = ""
-            for s in range (1,4):
+            for s in range(1, 4):
                 if self.sensor[s].isdigit():
                     cos = cos + self.sensor[s]
             cos = int(cos)
             t = ""
-            for s in range (10,15):
-                if self.sensor[s].isdigit() or self.sensor[s]==".":
+            for s in range(10, 15):
+                if self.sensor[s].isdigit() or self.sensor[s] == ".":
                     t = t + self.sensor[s]
             t = float(t)
             cos = abs(cos - 110) * 100
-            self.pushButton.setText(_translate("MainWindow", "CO2:" + str(cos)+" " + "Temp:" + str(t) , None))
+            self.pushButton.setText(_translate("MainWindow", "CO2:" + str(cos) + " " + "Temp:" + str(t), None))
         x = MainWindow.frameGeometry().width()
         y = MainWindow.frameGeometry().height()
-        self.gridLayoutWidget.setGeometry(QtCore.QRect(9, 10, x-170,y-80))
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(x-160, 10, 134, 62))
+        self.gridLayoutWidget.setGeometry(QtCore.QRect(9, 10, x - 170, y - 80))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(x - 160, 10, 134, 62))
 
-    def sendC(self,i,v):
-        BYTES = pack('BBBBBB',0,i,1,int(v/254+1),int(v%254+1),255)
+    def sendC(self, i, v):
+        BYTES = pack('BBBBBB', 0, i, 1, int(v / 254 + 1), int(v % 254 + 1), 255)
         try:
             self.sock.sendto(BYTES, (UDP_IP, UDP_PORT))
-            s = unpack ('BBBBBB',BYTES)
-            self.statusbar.showMessage(str(s),5000)
+            # ser.write(BYTES)
+            s = unpack('BBBBBB', BYTES)
+            self.statusbar.showMessage(str(s), 5000)
         except:
-            self.statusbar.showMessage("Error sending data",5000)
-
+            self.statusbar.showMessage("Error sending data", 5000)
 
     def camerat(self):
         if joy.leftThumbstick():
@@ -237,7 +252,7 @@ class Ui_MainWindow(object):
             if joy.X(): self.camera3 = 1
             if joy.Y(): self.camera4 = 1
         else:
-            if self.updatec==1:
+            if self.updatec == 1:
                 self.updatec = 0
                 if self.camera1 == 1 or self.camera2 == 1 or self.camera3 == 1 or self.camera4 == 1:
                     self.CamView2.hide()
@@ -248,7 +263,7 @@ class Ui_MainWindow(object):
                     if self.camera3 == 1: filename = "rtsp://192.168.1.13/live3.sdp"
                     if self.camera4 == 1: filename = "rtsp://192.168.1.14/live3.sdp"
                     self.media = self.instance.media_new(filename)
-                    self.media.add_options("network-caching=95")
+                    self.media.add_options("network-caching=195")
                     self.mediaplayer.set_media(self.media)
                     self.media.parse()
                     self.mediaplayer.play()
@@ -260,28 +275,28 @@ class Ui_MainWindow(object):
                     self.CamView4.show()
                     filename = "rtsp://192.168.1.11/live2.sdp"
                     self.media = self.instance.media_new(filename)
-                    self.media.add_options("network-caching=90")
+                    self.media.add_options("network-caching=190")
                     self.mediaplayer.set_media(self.media)
                     self.media.parse()
                     self.mediaplayer.play()
                     self.mediaplayer.set_xwindow(self.CamView.winId())
                     filename = "rtsp://192.168.1.15/user=admin_password=tlJwpbo6_channel=1_stream=0.sdp"
                     self.media2 = self.instance.media_new(filename)
-                    self.media2.add_options("network-caching=90")
+                    self.media2.add_options("network-caching=190")
                     self.mediaplayer2.set_media(self.media2)
                     self.media2.parse()
                     self.mediaplayer2.play()
                     self.mediaplayer2.set_xwindow(self.CamView2.winId())
                     filename = "rtsp://192.168.1.13/live2.sdp"
                     self.media3 = self.instance.media_new(filename)
-                    self.media3.add_options("network-caching=90")
+                    self.media3.add_options("network-caching=190")
                     self.mediaplayer3.set_media(self.media3)
                     self.media3.parse()
                     self.mediaplayer3.play()
                     self.mediaplayer3.set_xwindow(self.CamView3.winId())
                     filename = "rtsp://192.168.1.16/live2.sdp"
                     self.media4 = self.instance.media_new(filename)
-                    self.media4.add_options("network-caching=90")
+                    self.media4.add_options("network-caching=190")
                     self.mediaplayer4.set_media(self.media4)
                     self.media4.parse()
                     self.mediaplayer4.play()
@@ -291,105 +306,106 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
         self.pushButton.setText(_translate("MainWindow", "Conectar control", None))
         self.pushButton_2.setText(_translate("MainWindow", "Manipulacion", None))
-    #self.statusbar.showMessage("Conectando",5000)
+
+    # self.statusbar.showMessage("Conectando",5000)
 
     def joystick_clicked(self):
         if self.joyv == 0:
-            self.sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+            self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             self.datos = ""
             self.joyv = 1
             self.timerJ.start(40)
-            self.statusbar.showMessage("Control conectado",1000)
+            self.statusbar.showMessage("Control conectado", 1000)
         else:
             if self.joyv == 1:
                 self.joyv = 0
                 self.timerJ.stop()
-                self.statusbar.showMessage("Control desconectado",1000)
+                self.statusbar.showMessage("Control desconectado", 1000)
 
-        def wiznet_clicked(self):
+    def wiznet_clicked(self):
         if self.joyv == 0:
             self.joyv = 1
             self.timerJ.start(40)
-            self.statusbar.showMessage("Control conectado",1000)
+            self.statusbar.showMessage("Control conectado", 1000)
         else:
             if self.joyv == 1:
                 self.joyv = 0
                 self.timerJ.stop()
-                self.statusbar.showMessage("Control desconectado",1000)
+                self.statusbar.showMessage("Control desconectado", 1000)
 
-
-    def joyupdate_t(self):	
+    def joyupdate_t(self):
         try:
-            #Valid connect may require joystick input to occur
+            # Valid connect may require joystick input to occur
             if not joy.connected():
-            self.statusbar.showMessage("Error joy",5000)
+                self.statusbar.showMessage("Error joy", 5000)
         except:
-            print "corran"
-            #Show misc inputs until Back button is pressed    Bt(joy.rightBumper(),joy.leftBumper())  Bt(joy.Y(),joy.A())
-            if joy.connected(): 			#tr1, 			tr2, 		fl1 ,		fl2 ,			gripper, 			muñeca, 					girogrip, 		extension, girobrazo, Act1, Act2
+            print
+            "corran"
+        # Show misc inputs until Back button is pressed    Bt(joy.rightBumper(),joy.leftBumper())  Bt(joy.Y(),joy.A())
+        if joy.connected():  # tr1, 			tr2, 		fl1 ,		fl2 ,			gripper, 			muñeca, 					girogrip, 		extension, girobrazo, Act1, Act2
             if joy.Back() and self.updatem == 1:
                 self.updatem = 0
-                if self.mode ==1 :
+                if self.mode == 1:
                     self.mode = 0
                     self.pushButton_2.setText(_translate("MainWindow", "Manipulacion", None))
                 else:
                     self.mode = 1
                     self.pushButton_2.setText(_translate("MainWindow", "Movilidad", None))
-            elif not joy.Back() and self.updatem==0 : self.updatem = 1
+            elif not joy.Back() and self.updatem == 0:
+                self.updatem = 1
 
-            (m1,m2) = St( joy.leftX(),joy.leftY() )
+            (m1, m2) = St(-joy.leftX(), -joy.leftY())
             if self.mode == 1:
-                self.sendC( 2,toM(joy.leftY()) )
-                self.sendC( 4,toM(joy.rightY()) )
-                self.sendC( 1,toM(joy.leftX()) )
-                self.sendC( 3,toM(joy.rightX()) )
-                #self.sendC( 5,Bt(joy.rightBumper(),joy.leftBumper(),1) )
-                #self.sendC( 6,Bt(joy.Y(),joy.A(),1) )
-                #self.sendC( 7,Bt(joy.X(),joy.B(),3) )
-                #self.sendC( 8,1)
-                #self.sendC( 9,toM( joy.rightTrigger() - joy.leftTrigger() ) )
-                #self.sendC( 10,Bt( joy.dpadDown(),joy.dpadUp(),1) )
-                #self.sendC( 11,Bt( joy.dpadLeft(),joy.dpadRight(),1) )
+                self.sendC(3, toM(-joy.leftX()))
+                self.sendC(4, toM(-joy.leftY()))
+                self.sendC(1, toM(-joy.rightY()))
+                self.sendC(2, toM(joy.rightX()))
+            # self.sendC( 5,Bt(joy.rightBumper(),joy.leftBumper(),1) )
+            # self.sendC( 6,Bt(joy.Y(),joy.A(),1) )
+            # self.sendC( 7,Bt(joy.X(),joy.B(),3) )
+            # self.sendC( 8,1)
+            # self.sendC( 9,toM( joy.rightTrigger() - joy.leftTrigger() ) )
+            # self.sendC( 10,Bt( joy.dpadDown(),joy.dpadUp(),1) )
+            # self.sendC( 11,Bt( joy.dpadLeft(),joy.dpadRight(),1) )
 
-    #BYTES = pack('BBBBBBBBBBBBB',0 ,toM(joy.leftX()),toM(joy.rightY()),toM(joy.rightX()),toM(joy.leftY()),Bt(joy.rightBumper(),joy.leftBumper(),1) ,Bt(joy.Y(),joy.A(),1),Bt(joy.X(),joy.B(),3),1,toM(joy.rightTrigger()-joy.leftTrigger()),Bt(joy.dpadDown(),joy.dpadUp(),1),Bt(joy.dpadLeft(),joy.dpadRight(),1),128)
+            # BYTES = pack('BBBBBBBBBBBBB',0 ,toM(joy.leftX()),toM(joy.rightY()),toM(joy.rightX()),toM(joy.leftY()),Bt(joy.rightBumper(),joy.leftBumper(),1) ,Bt(joy.Y(),joy.A(),1),Bt(joy.X(),joy.B(),3),1,toM(joy.rightTrigger()-joy.leftTrigger()),Bt(joy.dpadDown(),joy.dpadUp(),1),Bt(joy.dpadLeft(),joy.dpadRight(),1),128)
             else:
-                self.sendC( 2, toM(m1) )
-                self.sendC( 4, toM(m2) )
-                self.sendC( 1,1 )
-                self.sendC( 2,1 )
-                self.sendC( 8,toM( joy.rightX() ) )
-                self.sendC( 9,toM( joy.rightY() ) )
-                self.sendC( 7,Bt(joy.rightBumper(),joy.leftBumper(),1) )
-                self.sendC( 6,Bt(joy.Y(),joy.A(),1) )
-                self.sendC( 5,toM( joy.rightTrigger() - joy.leftTrigger() ) )
-                self.sendC( 10,Bt( joy.dpadDown(),joy.dpadUp(),1.2) )
-                self.sendC( 11,Bt( joy.dpadLeft(),joy.dpadRight(),1.2) )
-                #BYTES = pack('BBBBBBBBBBBBB',0 ,1,toM(m2),1,toM(m1), toM(joy.rightX()) ,toM(joy.rightY()),Bt(joy.X(),joy.B(),4),Bt(joy.Y(),joy.A(),1),toM(joy.rightTrigger()-joy.leftTrigger()),Bt(joy.dpadDown(),joy.dpadUp(),1),Bt(joy.dpadLeft(),joy.dpadRight(),1),128)
-
-
+                self.sendC(4, toM(m1))
+                self.sendC(1, toM(m2))
+                self.sendC(3, 1)
+                self.sendC(2, 1)
+                self.sendC(8, toM(-joy.rightX()))
+                self.sendC(9, toM(joy.rightY()))
+                self.sendC(7, Bt(joy.rightBumper(), joy.leftBumper(), 1))
+                self.sendC(6, Bt(joy.A(), joy.Y(), 1))
+                self.sendC(5, toM(joy.rightTrigger() - joy.leftTrigger()))
+                self.sendC(10, Bt(joy.dpadUp(), joy.dpadDown(), 1.15))
+                self.sendC(11, Bt(joy.dpadLeft(), joy.dpadRight(), 1.15))
+            # BYTES = pack('BBBBBBBBBBBBB',0 ,1,toM(m2),1,toM(m1), toM(joy.rightX()) ,toM(joy.rightY()),Bt(joy.X(),joy.B(),4),Bt(joy.Y(),joy.A(),1),toM(joy.rightTrigger()-joy.leftTrigger()),Bt(joy.dpadDown(),joy.dpadUp(),1),Bt(joy.dpadLeft(),joy.dpadRight(),1),128)
 
 '''
 Normal:
 Joystick derecho: Mover adelante, atrás, izquierda y derecha.
 Joystick izquierdo: Mover mano, adelante, atrás y girar.
 D- Pad: Mover todo el brazo adelante / atrás.
-Y: Hacer brazo más chico.
-A: Hacer brazo más grande.
-LB, RB: Abrir y cerrar brazo.
+Y: Hacer brazo más chico. PENDIENTE PRUEBA
+A: Hacer brazo más grande. PENDIENTE PRUEBA
+LB, RB: Abrir y cerrar brazo. PENDIENTE PRUEBA
+LT, RT: Mover brazo izquierda, derecha. PENDIENTE PRUEBA
 
 Manipulación: 
 Joystick izquierdo, izquierda: Subir Llantas traseras.
 Joystick izquierdo, derecha: Bajar Llantas traseras.
 Joystick izquierdo, adelante / atrás: mover llantas izquierdas.
-
-
 Joystick derecho, izquierda: Subir Llantas delanteras.
 Joystick derecho, derecha: Bajar Llantas delanteras.
 Joystick derecho, adelante / atrás: mover llantas derechas.
 '''
+
 if __name__ == "__main__":
     import sys
-    app = QtGui.QApplication(sys.argv)	
+
+    app = QtGui.QApplication(sys.argv)
     MainWindow = MyWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)

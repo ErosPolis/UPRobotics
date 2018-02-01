@@ -5,6 +5,8 @@ joy = xbox.Joystick()
 
 
 if __name__ == "__main__":
-    m1, m2 = robot.st(joy.leftX(), joy.leftY())
+    if(joy.A == 1):
+        print("Clickeando")
+
 
 
