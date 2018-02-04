@@ -2,7 +2,7 @@ from struct import *
 
 
 class Robot():
-    def __init__(self, ip = "192.168.1.9", port = 5000):
+    def __init__(self, ip="192.168.1.9", port=5000):
         self.UDP_IP = ip
         self.UDP_PORT = port
 
@@ -62,7 +62,7 @@ class Robot():
             return int(2)
 
     @staticmethod
-    def st(self, x, y):
+    def st(x, y):
         ny = abs(y) - abs(x * y)
         a = abs(ny) + abs(x)
         b = abs(y) - abs(x)
