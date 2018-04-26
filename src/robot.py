@@ -8,8 +8,11 @@ class Robot():
 
     # Move the whole robot, front, back, left and right.
     def move_robot(self, value_x, value_y):
-        self.send_data(2, value_x)
-        self.send_data(1, value_y)
+        x, y = self.st(value_x, value_y )
+        regular_x = self.to_m(x)
+        regular_y = self.to_m(y)
+        self.send_data(2, regular_x)
+        self.send_data(1, regular_y)
 
     # Move the hand, up, down and rotate.
     def move_hand(self, value_x, value_y):

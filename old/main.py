@@ -388,7 +388,7 @@ LB, RB: Abrir y cerrar brazo. PENDIENTE PRUEBA
 LT, RT: Mover brazo izquierda, derecha. PENDIENTE PRUEBA
 
 Manipulación: 
-Joystick izquierdo, izquierda: Subir Llantas traseras.
+Joystick izquierdo, izquierda: Subir Llantas traseras. St, ToM
 Joystick izquierdo, derecha: Bajar Llantas traseras.
 Joystick izquierdo, adelante / atrás: mover llantas izquierdas.
 Joystick derecho, izquierda: Subir Llantas delanteras.

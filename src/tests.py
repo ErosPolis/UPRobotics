@@ -1,13 +1,13 @@
-import xbox
+import xboxcontroller
 import robot
 
-joy = xbox.Joystick()
+joy = xboxcontroller.Joystick()
 
 
 if __name__ == "__main__":
     while True:
-        print("Value Button A: " + str(joy.A))
-        print("Value")
+        print(str(joy.a()))
+
 
 
 
