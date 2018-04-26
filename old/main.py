@@ -337,8 +337,8 @@ class Ui_MainWindow(object):
             if not joy.connected():
                 self.statusbar.showMessage("Error joy", 5000)
         except:
-            print
-            "corran"
+            print ("corran")
+
         # Show misc inputs until Back button is pressed    Bt(joy.rightBumper(),joy.leftBumper())  Bt(joy.Y(),joy.A())
         if joy.connected():  # tr1, 			tr2, 		fl1 ,		fl2 ,			gripper, 			muñeca, 					girogrip, 		extension, girobrazo, Act1, Act2
             if joy.Back() and self.updatem == 1:
@@ -351,6 +351,26 @@ class Ui_MainWindow(object):
                     self.pushButton_2.setText(_translate("MainWindow", "Movilidad", None))
             elif not joy.Back() and self.updatem == 0:
                 self.updatem = 1
+
+            (m1, m2) = St(joy.leftX(), joy.leftY())
+            if self.mode == 1:
+                self.sendC(2, toM(joy.leftY()))
+                self.sendC(4, toM(joy.rightY()))
+                self.sendC(1, toM(joy.leftX()))
+                self.sendC(3, toM(joy.rightX()))
+
+            else:
+                self.sendC(2, toM(m1))
+                self.sendC(4, toM(m2))
+                self.sendC(1, 1)
+                self.sendC(2, 1)
+                self.sendC(8, toM(joy.rightX()))
+                self.sendC(9, toM(joy.rightY()))
+                self.sendC(7, Bt(joy.rightBumper(), joy.leftBumper(), 1))
+                self.sendC(6, Bt(joy.Y(), joy.A(), 1))
+                self.sendC(5, toM(joy.rightTrigger() - joy.leftTrigger()))
+                self.sendC(10, Bt(joy.dpadDown(), joy.dpadUp(), 1.2))
+                self.sendC(11, Bt(joy.dpadLeft(), joy.dpadRight(), 1.2))
 
 ''' Las siguientes lineas de codigo son las mas improtantes del robot, se encargan de mandar los datos del joystick a
 el robot mediante la funcion sendC, a continuacion documento que es lo que hace cada boton del joystick. El roboto tiene
@@ -375,26 +395,6 @@ Joystick derecho, izquierda: Subir Llantas delanteras.
 Joystick derecho, derecha: Bajar Llantas delanteras.
 Joystick derecho, adelante / atrás: mover llantas derechas.
 '''
-            (m1, m2) = St(joy.leftX(), joy.leftY())
-            if self.mode == 1:
-                self.sendC(2, toM(joy.leftY()))
-                self.sendC(4, toM(joy.rightY()))
-                self.sendC(1, toM(joy.leftX()))
-                self.sendC(3, toM(joy.rightX()))
-
-            else:
-                self.sendC(2, toM(m1))
-                self.sendC(4, toM(m2))
-                self.sendC(1, 1)
-                self.sendC(2, 1)
-                self.sendC(8, toM(joy.rightX()))
-                self.sendC(9, toM(joy.rightY()))
-                self.sendC(7, Bt(joy.rightBumper(), joy.leftBumper(), 1))
-                self.sendC(6, Bt(joy.Y(), joy.A(), 1))
-                self.sendC(5, toM(joy.rightTrigger() - joy.leftTrigger()))
-                self.sendC(10, Bt(joy.dpadDown(), joy.dpadUp(), 1.2))
-                self.sendC(11, Bt(joy.dpadLeft(), joy.dpadRight(), 1.2))
-
 
 #aqui se corre todo
 if __name__ == "__main__":
