@@ -353,6 +353,8 @@ class Ui_MainWindow(object):
                 self.updatem = 1
 
             (m1, m2) = St(joy.leftX(), joy.leftY())
+            print(toM(joy.rightX()))
+            print(toM(joy.rightY()))
             if self.mode == 1:
                 self.sendC(2, toM(joy.leftY()))
                 self.sendC(4, toM(joy.rightY()))

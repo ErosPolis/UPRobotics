@@ -1,14 +1,22 @@
 from struct import *
+import socket
 
 
-class Robot():
-    def __init__(self, ip="192.168.1.9", port=5000):
+class Robot:
+    # Constructor, we send the ronot's ip and port
+    def __init__(self, ip="192.168.1.9", port=5000, debug = True):
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.UDP_IP = ip
         self.UDP_PORT = port
+        self.debug = debug
+
+    def test_robot(self):
+        self.send_data(8, 300)
+        self.send_data(9, 2)
 
     # Move the whole robot, front, back, left and right.
     def move_robot(self, value_x, value_y):
-        x, y = self.st(value_x, value_y )
+        x, y = self.st(value_x, value_y)
         regular_x = self.to_m(x)
         regular_y = self.to_m(y)
         self.send_data(2, regular_x)
@@ -42,9 +50,10 @@ class Robot():
         try:
             self.sock.sendto(data, (self.UDP_IP, self.UDP_PORT))
             s = unpack('BBBBBB', data)
-            self.statusbar.showMessage(str(s), 5000)
+            if (self.debug):
+                print(s)
         except:
-            self.statusbar.showMessage("Error sending data", 5000)
+            print("Error sending data")
 
     @staticmethod
     def to_m(v):
@@ -79,5 +88,3 @@ class Robot():
             return b, a
         else:
             return a, b
-
-
