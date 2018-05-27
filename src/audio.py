@@ -2,40 +2,42 @@ import socket
 import pyaudio
 
 
-CHUNK = 1024
-FORMAT = pyaudio.paInt16
-CHANNELS = 1
-RATE = 44100
-RECORD_SECONDS = 5
+class AudioSender:
+    def __init__(self, host='192.168.1.128', port=50007, rate=44100, channels=1, format_type=pyaudio.paInt16,
+                 chunk=1024):
+        self.rate = rate
+        self.channels = channels
+        self.format_type = format_type
+        self.chunk = chunk
+        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.s.connect((host, port))
+        self.p = pyaudio.PyAudio()
 
-HOST = '192.168.1.128'    # The remote host
-PORT = 50007              # The same port as used by the server
+    def send_data(self, record_seconds=5):
+        stream = self.p.open(format=self.format_type,
+                             channels=self.channels,
+                             rate=self.rate,
+                             input=True,
+                             frames_per_buffer=self.chunk)
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((HOST, PORT))
+        print("recording audio")
 
-p = pyaudio.PyAudio()
+        frames = []
 
-stream = p.open(format=FORMAT,
-                channels=CHANNELS,
-                rate=RATE,
-                input=True,
-                frames_per_buffer=CHUNK)
+        for i in range(0, int(self.rate / self.chunk * record_seconds)):
+            data = stream.read(self.chunk)
+            frames.append(data)
+            self.s.sendall(data)
 
-print("*recording")
+        print("*done recording")
 
-frames = []
+        stream.stop_stream()
+        stream.close()
+        self.p.terminate()
+        self.s.close()
 
-for i in range(0, int(RATE/CHUNK*RECORD_SECONDS)):
- data  = stream.read(CHUNK)
- frames.append(data)
- s.sendall(data)
+        print("*closed")
 
-print("*done recording")
 
-stream.stop_stream()
-stream.close()
-p.terminate()
-s.close()
-
-print("*closed")
+conn = AudioSender()
+conn.send_data()
