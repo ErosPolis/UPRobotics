@@ -1,9 +1,8 @@
 from vpython import *
 
-# ball = sphere(pos=vector(0,0,0), radius=0.5, color=color.cyan)
 base = box(pos=vector(0, 0, 0), size=vector(12, 0.2, 12), color=color.white)
 
-# medidas en cm
+
 mbase = 11.6
 mele1 = 46.9
 mele2 = 4.7
@@ -14,12 +13,11 @@ class Bar:
     def __init__(self, pbase, pfin, pnormal=vector(1, 0, 0), col=color.cyan):
         self.base = sphere(pos=pbase, radius=0.5, color=color.white)
         self.end = sphere(pos=pfin, radius=0.5, color=color.white)
-#       self.norma = sqrt((pbase.x - pfin.x) ** 2 + (pbase.y - pfin.y) ** 2 + (pbase.z - pfin.z) ** 2)
         self.body = cylinder(pos=pbase, radius=0.5, axis=pfin - pbase, color=col)
         self.motor = cylinder(pos=pbase, radius=0.1, axis=pnormal, color=color.white)
         self.atached = []
 
-    def atach(self, bar):
+    def attach(self, bar):
         self.atached.append(bar)
 
     def rotate(self, angle):
@@ -51,9 +49,9 @@ p = Bar(vector(0, 0, 0), vector(0, mbase, 0))
 p2 = Bar(p.end.pos, vector(0, mbase, mele1), col=color.blue)
 p21 = Bar(p2.end.pos, vector(0, mbase + mele2, mele1), col=color.blue)
 p3 = Bar(p21.end.pos, vector(0, mbase + mele2, mele1 - mgrip), col=color.yellow)
-p.atach(p2)
-p2.atach(p21)
-p21.atach(p3)
+p.attach(p2)
+p2.attach(p21)
+p21.attach(p3)
 
 while True:
     p.rotate(0.001)
