@@ -4,12 +4,12 @@ import argparse
 import imutils
 import cv2
 
-ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", required=True,
-	help="path to the input image")
-args = vars(ap.parse_args())
+#ap = argparse.ArgumentParser()
+#ap.add_argument("-i", "--image", required=True,help="path to the input image")
+#args = vars(ap.parse_args())
 
-image = cv2.imread(args["image"])
+#image = cv2.imread(args["image"])
+image = cv2.imread("test.png")
 resized = imutils.resize(image, width=300)
 ratio = image.shape[0] / float(resized.shape[0])
 
