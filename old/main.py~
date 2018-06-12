@@ -256,7 +256,7 @@ class Ui_MainWindow(object):
                     if self.camera1 == 1: filename = "rtsp://192.168.1.11/live3.sdp"
                     if self.camera2 == 1: filename = "rtsp://192.168.1.15/user=admin_password=tlJwpbo6_channel=1_stream=1.sdp"
                     if self.camera3 == 1: filename = "rtsp://192.168.1.13/live3.sdp"
-                    if self.camera4 == 1: filename = "rtsp://192.168.1.14/live3.sdp"
+                    if self.camera4 == 1: filename = "rtsp://192.168.1.19/live3.sdp"
                     self.media = self.instance.media_new(filename)
                     self.media.add_options("network-caching=95")
                     self.mediaplayer.set_media(self.media)
@@ -368,7 +368,7 @@ class Ui_MainWindow(object):
                 self.sendC(2, 1)
                 self.sendC(8, toM(joy.rightX()))
                 self.sendC(9, toM(joy.rightY()))
-                self.sendC(6, Bt(joy.rightBumper(), joy.leftBumper(), 1.5))
+                self.sendC(6, Bt(joy.rightBumper(), joy.leftBumper(), 1.2))
                 self.sendC(7, Bt(joy.Y(), joy.A(), 1))
                 self.sendC(5, toM(joy.rightTrigger() - joy.leftTrigger()))
                 self.sendC(10, Bt(joy.dpadDown(), joy.dpadUp(), 1.2))
