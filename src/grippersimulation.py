@@ -22,6 +22,9 @@ class Bar:
     def atach(self, bar):
         self.atached.append(bar)
 
+    def rotationstoangles(self,rot):
+
+
     def rotate(self, angle):
         self.end.rotate(angle, self.end.pos - self.base.pos, self.base.pos)
         self.body.rotate(angle, self.end.pos - self.base.pos, self.base.pos)
@@ -55,5 +58,8 @@ p.atach(p2)
 p2.atach(p21)
 p21.atach(p3)
 
+# montar conexion
+
 while True:
+    #leer datos
     p.rotate(0.001)
