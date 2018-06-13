@@ -7,8 +7,13 @@ class ColorLabeler:
 	def __init__(self):
 		colors = OrderedDict({
 			"red": (255, 0, 0),
-			"green": (0, 255, 0),
-			"blue": (0, 0, 255)})
+			"green": (0, 167, 10),
+			"blue": (0, 0, 255),
+			"yellow": (254, 219, 0),
+			#"black": (0, 0, 0),
+			"orange": (247, 132, 42),
+			"white": (255, 255, 255),
+		})
 
 		self.lab = np.zeros((len(colors), 1, 3), dtype="uint8")
 		self.colorNames = []
