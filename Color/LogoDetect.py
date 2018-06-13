@@ -1,9 +1,8 @@
-from pyimagesearch.shapedetector import ShapeDetector
-from pyimagesearch.colorlabeler import ColorLabeler
-#import argparse
-import imutils
 import cv2
+import imutils
 import numpy as np
+
+from pyimagesearch.shapedetector import ShapeDetector
 
 #ap = argparse.ArgumentParser()
 #ap.add_argument("-i", "--image", required=True,help="path to the input image")
@@ -21,6 +20,7 @@ while True:
 
 
     ret, image=cam.read()
+    #image = cv2.imread('Unused/try.png')
     resized = imutils.resize(image, width=600)
     if(ratio==0):
         ratio = image.shape[0] / float(resized.shape[0])
@@ -41,18 +41,20 @@ while True:
         if shape is not "square":
             continue
         area = cv2.contourArea(c, False)
-        if(area<700):
+        if(area<2000):
             continue
+        #print(area)
         c = c.astype("float")
         c *= ratio
         c = c.astype("int")
-        mask = np.zeros(image.shape, np.uint8)
         cv2.drawContours(image, [c], -1, (0, 255, 0), 2)
-
         mask = np.zeros(image.shape, np.uint8)
         cv2.drawContours(mask, [c], -1, (1,1,1), cv2.FILLED)
-        mask=image*mask
+        sign=image*mask
         cv2.imshow("mask", mask)
+        
+
+
 
 
     cv2.imshow("Image", image)

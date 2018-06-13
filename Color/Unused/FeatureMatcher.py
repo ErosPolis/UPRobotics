@@ -6,11 +6,14 @@ import cv2
 from matplotlib import pyplot as plt
 
 
-def FeatureMatcher(img,img2):
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+def FeatureMatcher(oimg,oimg2):
+    img = cv2.cvtColor(oimg, cv2.COLOR_BGR2GRAY)
     img=imutils.resize(img, width=300)
-    img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2HSV)
+    oimg=imutils.resize(oimg, width=300)
+    #img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2HSV)
+    img2 = cv2.cvtColor(oimg2, cv2.COLOR_BGR2GRAY)
     img2=imutils.resize(img2, width=600)
+    oimg2=imutils.resize(oimg2, width=600)
     # img2 = cv2.GaussianBlur(img2, (5, 5), 0)
     MIN_MATCH_COUNT = 10
     # Initiate ORB detector
@@ -45,10 +48,13 @@ def FeatureMatcher(img,img2):
         dst_pts = np.float32([ kp2[m.trainIdx].pt for m in good ]).reshape(-1,1,2)
         M, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC,5.0)
         matchesMask = mask.ravel().tolist()
-        h,w,d = img.shape
+        h,w = img.shape
         pts = np.float32([ [0,0],[0,h-1],[w-1,h-1],[w-1,0] ]).reshape(-1,1,2)
         dst = cv2.perspectiveTransform(pts,M)
-        img2 = cv2.polylines(img2,[np.int32(dst)],True,255,3, cv2.LINE_AA)
+        img2 = cv2.polylines(oimg2,[np.int32(dst)],True,(255,0,0),2, cv2.LINE_AA)
+        print(np.int32(dst))
+        cv2.mean(np.int32(dst))
+
     else:
         print( "Not enough matches are found - {}/{}".format(len(good), MIN_MATCH_COUNT) )
         matchesMask = None
@@ -57,10 +63,13 @@ def FeatureMatcher(img,img2):
                        singlePointColor = None,
                        matchesMask = matchesMask, # draw only inliers
                        flags = 2)
-    img3 = cv2.drawMatches(img,kp1,img2,kp2,good,None,**draw_params)
-    plt.imshow(img3, 'gray'),plt.show()
+    img3 = cv2.drawMatches(oimg,kp1,img2,kp2,good,None,**draw_params)
+    return img3
+
 
 if __name__ == "__main__":
-    img = cv2.imread('Unused/try.png')
-    img2 = cv2.imread('Unused/seniales.png')
-    FeatureMatcher(img, img2)
+    img = cv2.imread('try.png')
+    img2 = cv2.imread('seniales.png')
+    #cv2.imshow("matcher" ,cv2.cvtColor(FeatureMatcher(img, img2), cv2.COLOR_HSV2BGR))
+    cv2.imshow("matcher" ,FeatureMatcher(img, img2))
+    cv2.waitKey(0)
