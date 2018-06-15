@@ -13,16 +13,16 @@ import numpy as np
 #image = cv2.imread("test2.jpg")
 #def detectcolorshape(image):
 
-	#image = cv2.imread("try.png")
 
 cam = cv2.VideoCapture(0)
 ret, image=cam.read()
-resized = imutils.resize(image, width=300)
+image = cv2.imread("seniales.png")
+resized = imutils.resize(image, width=600)
 cv2.imshow("ss", resized)
 
 ratio = image.shape[0] / float(resized.shape[0])
 
-blurred = cv2.GaussianBlur(resized, (5, 5), 0)
+blurred = cv2.GaussianBlur(resized, (1, 1), 0)
 cv2.waitKey(0)
 edged = cv2.Canny(blurred, 50, 100, 255)
 cv2.imshow("ss", edged)
@@ -68,8 +68,9 @@ if(len(cnts)>0):
             c *= ratio
             c = c.astype("int")
             text = "{} {}".format(color, shape)
-            cv2.drawContours(image, [c], -1, (0, 255, 0), 2)
-            cv2.putText(image, text, (cX, cY),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (100, 100, 100), 2)
-            cv2.imshow("Image", image)
+            cv2.drawContours(image, [c], -1, (0, 255, 0), cv2.FILLED)
+            cv2.putText(image, text, (cX, cY), cv2.FONT_HERSHEY_SIMPLEX, 2, (100, 100, 100), 2)
+
+            resized = imutils.resize(image, width=600)
+            cv2.imshow("Image", resized)
             cv2.waitKey(0)
