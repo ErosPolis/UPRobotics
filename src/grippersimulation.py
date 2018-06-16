@@ -12,6 +12,16 @@ class Bar: #clase para una barra
     def atach(self, bar):
         self.atached.append(bar)
 
+    def check(self):
+        bol = True
+        if len(self.atached) > 0:
+            for elem in self.atached:
+                bol = bol and elem.check()
+                if(not bol):
+                    break
+        if(not bol):
+            return bol
+        return self.base.pos.y>0 and self.end.pos.y>0
     def rotate(self, angle):
         self.end.rotate(angle, self.end.pos - self.base.pos, self.base.pos)
         self.body.rotate(angle, self.end.pos - self.base.pos, self.base.pos)
@@ -99,8 +109,10 @@ while True:
         motor3 = valor3 - motor3_anterior
 
         p.rotate(to_angles(motor1,vueltas_para_180_motor1))
-        p2.rotatem(to_angles(motor2,vueltas_para_180_motor2))
-        p3.rotatem(to_angles(motor3,vueltas_para_180_motor3))
+        if(p2.check()):
+            p2.rotatem(to_angles(motor2,vueltas_para_180_motor2))
+        if(p3.check()):
+            p3.rotatem(to_angles(motor3,vueltas_para_180_motor3))
 
         motor1_anterior = valor1
         motor2_anterior = valor2
