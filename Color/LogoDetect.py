@@ -16,9 +16,11 @@ def getconthist(contour,image,numbins):
     cv2.drawContours(mask, [c], -1, (1, 1, 1), cv2.FILLED)
 
     sign = cv2.cvtColor(image, cv2.COLOR_RGB2HSV) * mask
-    cv2.imshow("mask", imutils.resize(sign[:, :, 0], width=600))
+
+    cv2.imshow("mask", imutils.resize(sign, width=600))
 
     hist = cv2.calcHist([sign], [0], mask[:, :, 0], [numbins], [0, 256])
+
 
     #plt.figure()
     #plt.title("Hue Histogram")
@@ -36,11 +38,11 @@ def entropy(hist,numbins):
     for p in prob:
         if(p>0):
             H += p* mth.log(p,2)
-    return H
+    return H/5000
 
 def distanceE(v1,v2):
     if(len(v1)!= len(v2)):
-        print("v1 and v2 differ lenght")
+        print("v1 and v2 differ lenght "+str(len(v1))+" "+str(len(v2)))
         return 0
     res = v1-v2
     res = res**2
@@ -52,6 +54,12 @@ def learn(dir,databins):
     i = 0
     centers = []
     labels = []
+
+    #plt.figure()
+    #plt.title("Hue Histogram")
+    #plt.xlabel("Bins")
+    #plt.ylabel("# of Pixels")
+
     for f in files:
         image = cv2.imread(dir+'/'+f)
 
@@ -59,16 +67,22 @@ def learn(dir,databins):
         # cv2.imshow("mask", imutils.resize(sign[:, :, 0], width=600))
 
         hist = cv2.calcHist([sign[:, :, 0]], [0], None, [databins], [0, 256])
-        kdata = np.insert((hist / sum(hist)), bins, entropy(hist, bins))
-
+        #kdata = (hist / sum(hist))
+        e = entropy(hist, bins)
+        kdata = np.insert((hist / sum(hist)), bins,[e])
+        #print ( entropy(hist, bins))
         criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 0.01)
-        compactness, labelss, cent = cv2.kmeans(kdata, 1,None, criteria, 3,cv2.KMEANS_RANDOM_CENTERS)
+        compactness, labelss, cent = cv2.kmeans(np.array([kdata,kdata]), 1,None, criteria, 3,cv2.KMEANS_RANDOM_CENTERS)
 
 
         centers.append(kdata)
         #print(cent)
         labels.append(os.path.splitext(f)[0])
         i +=1
+
+    #    plt.plot(hist)
+    #    plt.xlim([0, databins])
+    #plt.show()
     return centers,labels
 
 if __name__ == "__main__":
@@ -76,7 +90,7 @@ if __name__ == "__main__":
     sd = ShapeDetector()
     ratio = 0
     bins = 100
-
+    entropyImp=100000
     # names = np.array([
     #     'Corrosive8',
     #     'DangerousWhenWet4',
@@ -159,10 +173,11 @@ if __name__ == "__main__":
     while True:
 
 
-        #ret, image=cam.read()
-        image = cv2.imread('seniales.png')
+        ret, image=cam.read()
+        #image = cv2.imread('seniales.png')
 
         resized = imutils.resize(image, width=1200)
+        #cv2.imshow("wut",resized)
         if(ratio==0):
             ratio = image.shape[0] / float(resized.shape[0])
         blurred = cv2.GaussianBlur(resized, (3, 3), 0)
@@ -187,17 +202,33 @@ if __name__ == "__main__":
                 continue
 
             #print(area)
-
             hist = getconthist(c,image,bins)
 
+            #plt.figure()
+            #plt.xlabel("Bins")
+            #plt.ylabel("# of Pixels")
+            #plt.plot(hist/sum(hist))
+            #plt.xlim([0, bins])
+            #plt.title("muestra")
+            #plt.show()
 
+            #kdata = (hist/sum(hist))
             kdata = np.insert((hist/sum(hist)),bins,entropy(hist,bins))
 
             imin =0
             min= 1000000
             i=0
+
             for x in centers:
                 d = distanceE(kdata,x)
+                if(not cv2.waitKey(22)):
+                    plt.figure()
+                    plt.xlabel("Bins")
+                    plt.ylabel("# of Pixels")
+                    plt.plot(kdata)
+                    plt.plot(x)
+                    plt.title(names[i])
+                    plt.show()
                 if(min>d):
                     min = d
                     imin=i
@@ -205,6 +236,7 @@ if __name__ == "__main__":
             print(names[imin])
             print(min)
             cv2.waitKey(0)
+
 
 
         cv2.imshow("Image", imutils.resize(image, width=600))

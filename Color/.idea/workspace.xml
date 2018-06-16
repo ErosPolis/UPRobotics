@@ -18,26 +18,23 @@
       <file leaf-file-name="LogoDetect.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/LogoDetect.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-119">
-              <caret line="161" column="9" lean-forward="false" selection-start-line="161" selection-start-column="9" selection-end-line="161" selection-end-column="9" />
+            <state relative-caret-position="102">
+              <caret line="174" column="0" lean-forward="true" selection-start-line="174" selection-start-column="0" selection-end-line="174" selection-end-column="0" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
-                <element signature="e#211#813#0" expanded="false" />
-                <element signature="e#846#956#0" expanded="false" />
-                <element signature="e#984#1127#0" expanded="false" />
-                <element signature="e#2003#2023#0" expanded="false" />
+                <element signature="e#2340#2360#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FeatureMatcher.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Unused/FeatureMatcher.py">
+      <file leaf-file-name="borrarkmeans.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/borrarkmeans.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="68" column="0" lean-forward="true" selection-start-line="68" selection-start-column="0" selection-end-line="69" selection-end-column="26" />
+            <state relative-caret-position="136">
+              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding>
-                <element signature="e#1#11#0" expanded="true" />
+                <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -64,6 +61,7 @@
         <option value="$PROJECT_DIR$/FeatureMatcher.py" />
         <option value="$PROJECT_DIR$/Unused/FeatureMatcher.py" />
         <option value="$PROJECT_DIR$/Unused/detect_color.py" />
+        <option value="$PROJECT_DIR$/borrarkmeans.py" />
         <option value="$PROJECT_DIR$/LogoDetect.py" />
       </list>
     </option>
@@ -112,20 +110,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Color" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Color" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TrainingImg" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -152,23 +136,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.LogoDetect">
-    <configuration default="false" name="webcam2" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Color" />
-      <option name="SCRIPT_NAME" value="C:\Users\usuario\Documents\8_semestre\Robotica\repo\UPRobotics\Color\LogoDetect.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
     <configuration default="false" name="FeatureMatcher (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -233,6 +200,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Color" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Unused/FeatureMatcher.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="borrarkmeans" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Color" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/borrarkmeans.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -372,19 +356,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.webcam2" />
-      <item index="1" class="java.lang.String" itemvalue="Python.FeatureMatcher (1)" />
-      <item index="2" class="java.lang.String" itemvalue="Python.LogoDetect" />
-      <item index="3" class="java.lang.String" itemvalue="Python.detect_color (1)" />
-      <item index="4" class="java.lang.String" itemvalue="Python.FeatureMatcher" />
+      <item index="0" class="java.lang.String" itemvalue="Python.FeatureMatcher (1)" />
+      <item index="1" class="java.lang.String" itemvalue="Python.LogoDetect" />
+      <item index="2" class="java.lang.String" itemvalue="Python.detect_color (1)" />
+      <item index="3" class="java.lang.String" itemvalue="Python.FeatureMatcher" />
+      <item index="4" class="java.lang.String" itemvalue="Python.borrarkmeans" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.LogoDetect" />
-        <item index="1" class="java.lang.String" itemvalue="Python.FeatureMatcher" />
-        <item index="2" class="java.lang.String" itemvalue="Python.detect_color (1)" />
-        <item index="3" class="java.lang.String" itemvalue="Python.FeatureMatcher (1)" />
-        <item index="4" class="java.lang.String" itemvalue="Python.webcam2" />
+        <item index="1" class="java.lang.String" itemvalue="Python.borrarkmeans" />
+        <item index="2" class="java.lang.String" itemvalue="Python.FeatureMatcher" />
+        <item index="3" class="java.lang.String" itemvalue="Python.detect_color (1)" />
+        <item index="4" class="java.lang.String" itemvalue="Python.FeatureMatcher (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -436,7 +420,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="3" />
+      <option name="time" value="7" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -615,10 +599,7 @@
           <caret line="54" column="32" lean-forward="false" selection-start-line="54" selection-start-column="32" selection-end-line="54" selection-end-column="32" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
-            <element signature="e#211#813#0" expanded="false" />
-            <element signature="e#846#956#0" expanded="false" />
-            <element signature="e#984#1127#0" expanded="false" />
-            <element signature="e#2003#2023#0" expanded="false" />
+            <element signature="e#2340#2360#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -628,7 +609,7 @@
         <state relative-caret-position="595">
           <caret line="39" column="39" lean-forward="false" selection-start-line="39" selection-start-column="39" selection-end-line="39" selection-end-column="39" />
           <folding>
-            <element signature="e#1#11#0" expanded="true" />
+            <element signature="e#1#11#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -776,7 +757,7 @@
         <state relative-caret-position="170">
           <caret line="68" column="0" lean-forward="true" selection-start-line="68" selection-start-column="0" selection-end-line="69" selection-end-column="26" />
           <folding>
-            <element signature="e#1#11#0" expanded="true" />
+            <element signature="e#1#11#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -789,16 +770,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/numpy/lib/function_base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="79">
+          <caret line="5113" column="35" lean-forward="true" selection-start-line="5113" selection-start-column="35" selection-end-line="5113" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/borrarkmeans.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/LogoDetect.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-119">
-          <caret line="161" column="9" lean-forward="false" selection-start-line="161" selection-start-column="9" selection-end-line="161" selection-end-column="9" />
+        <state relative-caret-position="102">
+          <caret line="174" column="0" lean-forward="true" selection-start-line="174" selection-start-column="0" selection-end-line="174" selection-end-column="0" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
-            <element signature="e#211#813#0" expanded="false" />
-            <element signature="e#846#956#0" expanded="false" />
-            <element signature="e#984#1127#0" expanded="false" />
-            <element signature="e#2003#2023#0" expanded="false" />
+            <element signature="e#2340#2360#0" expanded="false" />
           </folding>
         </state>
       </provider>
