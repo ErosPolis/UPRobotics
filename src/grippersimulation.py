@@ -109,10 +109,12 @@ while True:
         motor3 = valor3 - motor3_anterior
 
         p.rotate(to_angles(motor1,vueltas_para_180_motor1))
-        if(p2.check()):
-            p2.rotatem(to_angles(motor2,vueltas_para_180_motor2))
+        p2.rotatem(to_angles(motor2, vueltas_para_180_motor2))
+        if(not p2.check()):
+            p2.rotatem(to_angles(-motor2, vueltas_para_180_motor2))
+        p3.rotatem(to_angles(motor3, vueltas_para_180_motor3))
         if(p3.check()):
-            p3.rotatem(to_angles(motor3,vueltas_para_180_motor3))
+            p3.rotatem(to_angles(-motor3,vueltas_para_180_motor3))
 
         motor1_anterior = valor1
         motor2_anterior = valor2
