@@ -1,16 +1,6 @@
 from vpython import *
-
-# ball = sphere(pos=vector(0,0,0), radius=0.5, color=color.cyan)
-base = box(pos=vector(0, 0, 0), size=vector(12, 0.2, 12), color=color.white)
-
-# medidas en cm
-mbase = 11.6
-mele1 = 46.9
-mele2 = 4.7
-mgrip = 45.7
-
-
-class Bar:
+import cv2
+class Bar: #clase para una barra
     def __init__(self, pbase, pfin, pnormal=vector(1, 0, 0), col=color.cyan):
         self.base = sphere(pos=pbase, radius=0.5, color=color.white)
         self.end = sphere(pos=pfin, radius=0.5, color=color.white)
@@ -21,9 +11,6 @@ class Bar:
 
     def atach(self, bar):
         self.atached.append(bar)
-
-    def rotationstoangles(self,rot):
-
 
     def rotate(self, angle):
         self.end.rotate(angle, self.end.pos - self.base.pos, self.base.pos)
@@ -49,17 +36,72 @@ class Bar:
             for elem in self.atached:
                 elem.__rotate(angle, axis, origin)
 
+def to_angles(rot,v180): #funcion para pasar a angulos las vueltas que manda el motor
+    # nov ---->  "vueltas" que da el motor para girar 180°
+    # rot ---->  "vueltas", lo que manda el motor
+    a = (rot*3.141592)/v180
+    return a
 
-p = Bar(vector(0, 0, 0), vector(0, mbase, 0))
-p2 = Bar(p.end.pos, vector(0, mbase, mele1), col=color.blue)
-p21 = Bar(p2.end.pos, vector(0, mbase + mele2, mele1), col=color.blue)
-p3 = Bar(p21.end.pos, vector(0, mbase + mele2, mele1 - mgrip), col=color.yellow)
+# medidas en cm
+medida_base = 11.6
+medida_ele1 = 46.9
+medida_ele2 = 4.7
+medida_grip = 45.7
+
+#esta es la "mesa"
+base = box(pos=vector(0, 0, 0), size=vector(12, 0.2, 12), color=color.white)
+#cada parte de los brazos
+p = Bar(vector(0, 0, 0), vector(0, medida_base, 0))
+p2 = Bar(p.end.pos, vector(0, medida_base, medida_ele1), col=color.blue)
+p21 = Bar(p2.end.pos, vector(0, medida_base + medida_ele2, medida_ele1), col=color.blue)
+p3 = Bar(p21.end.pos, vector(0, medida_base + medida_ele2, medida_ele1 - medida_grip), col=color.yellow)
 p.atach(p2)
 p2.atach(p21)
 p21.atach(p3)
 
-# montar conexion
+
+
+
+
+# numero de vueltas que marca cada motor para girar 180° /////////////////////////////////////////////
+# (no puede ser 0)
+vueltas_para_180_motor1 = 100
+vueltas_para_180_motor2 = 100
+vueltas_para_180_motor3 = 100
+
+
+
+# montar conexion y recibir datos //////////////////////////////////
+
+motor1 = 0  # motor que gira el brazo en la base
+motor2 = 0  # motor que mueve el primer segmento
+motor3 = 0  # motor que mueve el segundo segmento
+
+# valor anterior de cada motor
+motor1_anterior = 0
+motor2_anterior = 0
+motor3_anterior = 0
 
 while True:
-    #leer datos
-    p.rotate(0.001)
+
+    # hay que leer datos////////////////////////////////////////////
+
+    if(True): #debe ser: if(se reciben los siguientes datos):///////////////////////////////////////
+
+        #Aqui actualiza los valores de "vueltas" que mande cada motora////////////////////////////////////
+        valor1 = 0 #/////
+        valor2 = 0 #/////
+        valor3 = 0 #/////
+
+
+        motor1 = valor1 - motor1_anterior
+        motor2 = valor2 - motor2_anterior
+        motor3 = valor3 - motor3_anterior
+
+        p.rotate(to_angles(motor1,vueltas_para_180_motor1))
+        p2.rotatem(to_angles(motor2,vueltas_para_180_motor2))
+        p3.rotatem(to_angles(motor3,vueltas_para_180_motor3))
+
+        motor1_anterior = valor1
+        motor2_anterior = valor2
+        motor3_anterior = valor3
