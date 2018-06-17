@@ -17,7 +17,9 @@ def getconthist(contour,image,numbins):
 
     sign = cv2.cvtColor(image, cv2.COLOR_RGB2HSV) * mask
 
-    cv2.imshow("mask", imutils.resize(sign, width=600))
+    cv2.imshow("mask", sign)
+    #cv2.imshow("mask2", imutils.resize(cv2.cvtColor(image, cv2.COLOR_RGB2HSV)[:, :, 1], width=600))
+    #cv2.imshow("mask3", imutils.resize(cv2.cvtColor(image, cv2.COLOR_RGB2HSV)[:, :, 2], width=600))
 
     hist = cv2.calcHist([sign], [0], mask[:, :, 0], [numbins], [0, 256])
 
@@ -60,24 +62,28 @@ def learn(dir,databins):
     #plt.xlabel("Bins")
     #plt.ylabel("# of Pixels")
 
-    for f in files:
-        image = cv2.imread(dir+'/'+f)
+    for ff in files:
+        im = os.listdir(dir+"/"+ff)
+        logodata = []
+        for f in im:
+            image = cv2.imread(dir+"/"+ff+'/'+f)
+            #cv2.imshow("t",image)
+            #cv2.waitKey(1000)
+            sign = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
+            # cv2.imshow("mask", imutils.resize(sign[:, :, 0], width=600))
 
-        sign = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
-        # cv2.imshow("mask", imutils.resize(sign[:, :, 0], width=600))
+            hist = cv2.calcHist([sign[:, :, 0]], [0], None, [databins], [0, 256])
+            #kdata = (hist / sum(hist))
+            e = entropy(hist, bins)
+            kdata = np.insert((hist / sum(hist)), bins,[e])
 
-        hist = cv2.calcHist([sign[:, :, 0]], [0], None, [databins], [0, 256])
-        #kdata = (hist / sum(hist))
-        e = entropy(hist, bins)
-        kdata = np.insert((hist / sum(hist)), bins,[e])
-        #print ( entropy(hist, bins))
+            logodata.append(kdata)
+            #print ( entropy(hist, bins))
         criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 0.01)
-        compactness, labelss, cent = cv2.kmeans(np.array([kdata,kdata]), 1,None, criteria, 3,cv2.KMEANS_RANDOM_CENTERS)
-
-
-        centers.append(kdata)
+        compactness, labelss, cent = cv2.kmeans(np.array(logodata), 1,None, criteria, 3,cv2.KMEANS_RANDOM_CENTERS)
+        centers.append(cent)
         #print(cent)
-        labels.append(os.path.splitext(f)[0])
+        labels.append(os.path.splitext(ff)[0])
         i +=1
 
     #    plt.plot(hist)
@@ -168,15 +174,15 @@ if __name__ == "__main__":
     #      2.2882162e+05]
     # ])
 
-    centers,names = learn('TrainingImg',bins)
+    centers,names = learn('vision_logos',bins)
 
     while True:
 
 
-        ret, image=cam.read()
-        #image = cv2.imread('seniales.png')
+        #ret, image=cam.read()
+        image = cv2.imread('indice.jpg')
 
-        resized = imutils.resize(image, width=1200)
+        resized = imutils.resize(image, width=600)
         #cv2.imshow("wut",resized)
         if(ratio==0):
             ratio = image.shape[0] / float(resized.shape[0])
@@ -203,7 +209,7 @@ if __name__ == "__main__":
 
             #print(area)
             hist = getconthist(c,image,bins)
-
+            #print(hist)
             #plt.figure()
             #plt.xlabel("Bins")
             #plt.ylabel("# of Pixels")
@@ -213,29 +219,32 @@ if __name__ == "__main__":
             #plt.show()
 
             #kdata = (hist/sum(hist))
-            kdata = np.insert((hist/sum(hist)),bins,entropy(hist,bins))
+            kdata = np.insert((hist/sum(hist)),bins,[entropy(hist,bins)])
 
             imin =0
             min= 1000000
             i=0
 
             for x in centers:
-                d = distanceE(kdata,x)
-                if(not cv2.waitKey(22)):
-                    plt.figure()
-                    plt.xlabel("Bins")
-                    plt.ylabel("# of Pixels")
-                    plt.plot(kdata)
-                    plt.plot(x)
-                    plt.title(names[i])
-                    plt.show()
+                d = distanceE(kdata,x[0])
+                #if(not cv2.waitKey(22)):
+                    #plt.figure()
+                    #plt.xlabel("Bins")
+                    #plt.ylabel("# of Pixels")
+                    #plt.plot(kdata)
+                    #plt.plot(x)
+                    #plt.title(names[i])
+                    #plt.show()
                 if(min>d):
                     min = d
                     imin=i
                 i+=1
-            print(names[imin])
-            print(min)
-            cv2.waitKey(0)
+            if(min<1000):
+                print(names[imin])
+                print(min)
+                cv2.waitKey(3000)
+
+
 
 
 
