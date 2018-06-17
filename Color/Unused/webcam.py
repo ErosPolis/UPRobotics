@@ -11,10 +11,23 @@ kernelClose=np.ones((20,20))
 font = cv2.FONT_HERSHEY_SIMPLEX
 
 while True:
+
+
+
     ret, img=cam.read()
-    img=cv2.resize(img,(340,220))
+    img=cv2.resize(img,(680,440))
+
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    blurred = cv2.GaussianBlur(gray, (3, 3), 0)
+    edged = cv2.Canny(gray, 50, 100, 255)
+    cv2.imshow("cam",edged)
+
+
+
     #Convertir BGR to HSV
     imgHSV= cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
+
+    #cv2.imshow("cam",imgHSV[:,:,0])
     mask=cv2.inRange(imgHSV,lowerBound,upperBound)
     maskOpen=cv2.morphologyEx(mask,cv2.MORPH_OPEN,kernelOpen)
     maskClose=cv2.morphologyEx(maskOpen,cv2.MORPH_CLOSE,kernelClose)
@@ -29,8 +42,9 @@ while True:
         #Arreglar esto
         #cv2.putText(np.array(img), str(i+1),(x,y+h),font,(0,255,255))
 
-    cv2.imshow("maskClose",maskClose)
-    cv2.imshow("maskOpen",maskOpen)
-    cv2.imshow("mask",mask)
+    #cv2.imshow("maskClose",maskClose)
+    #cv2.imshow("maskOpen",maskOpen)
+    #cv2.imshow("mask",mask)
     cv2.imshow("cam",img)
+    cv2.imshow("cam2",edged)
     cv2.waitKey(10)

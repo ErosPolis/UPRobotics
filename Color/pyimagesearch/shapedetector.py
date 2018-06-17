@@ -10,17 +10,17 @@ class ShapeDetector:
 		approx = cv2.approxPolyDP(c, 0.04 * peri, True)
 
 		if len(approx) == 3:
-			shape = "triangulo"
+			shape = "triangle"
 
 		elif len(approx) == 4:
 			(x, y, w, h) = cv2.boundingRect(approx)
 			ar = w / float(h)
-			shape = "cuadrado" if ar >= 0.95 and ar <= 1.05 else "rectangulo"
+			shape = "square" if ar >= 0.99 and ar <= 1.01 else "rectangle"
 
 		elif len(approx) == 5:
-			shape = "pentagono"
+			shape = "pentagon"
 
 		else:
-			shape = "circulo"
+			shape = "circle"
 
 		return shape
