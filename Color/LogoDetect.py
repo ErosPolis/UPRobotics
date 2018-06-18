@@ -17,7 +17,7 @@ def getconthist(contour,image,numbins):
 
     sign = cv2.cvtColor(image, cv2.COLOR_RGB2HSV) * mask
 
-    cv2.imshow("mask", sign)
+    cv2.imshow("mask", imutils.resize(image*mask, width=600))
     #cv2.imshow("mask2", imutils.resize(cv2.cvtColor(image, cv2.COLOR_RGB2HSV)[:, :, 1], width=600))
     #cv2.imshow("mask3", imutils.resize(cv2.cvtColor(image, cv2.COLOR_RGB2HSV)[:, :, 2], width=600))
 
@@ -29,7 +29,7 @@ def getconthist(contour,image,numbins):
     #plt.xlabel("Bins")
     #plt.ylabel("# of Pixels")
     #plt.plot(hist)
-    #plt.xlim([0, bins])
+    #plt.xlim([0, numbins])
     #plt.show()
 
     return hist
@@ -40,7 +40,8 @@ def entropy(hist,numbins):
     for p in prob:
         if(p>0):
             H += p* mth.log(p,2)
-    return H/5000
+    #print(H)
+    return H/100000
 
 def distanceE(v1,v2):
     if(len(v1)!= len(v2)):
@@ -57,38 +58,42 @@ def learn(dir,databins):
     centers = []
     labels = []
 
-    #plt.figure()
-    #plt.title("Hue Histogram")
-    #plt.xlabel("Bins")
-    #plt.ylabel("# of Pixels")
+
 
     for ff in files:
+        #plt.figure()
+        #plt.title(ff)
+        #plt.xlabel("numbins")
+        #plt.ylabel("# of Pixels")
         im = os.listdir(dir+"/"+ff)
         logodata = []
         for f in im:
             image = cv2.imread(dir+"/"+ff+'/'+f)
-            #cv2.imshow("t",image)
-            #cv2.waitKey(1000)
-            sign = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
+
+            massk = np.zeros((len(image), len(image[0]), 3), np.uint8)
+            m = image[:, :, 0] < 255
+            massk[m] = (1, 1, 1)
+
+            sign = cv2.cvtColor(image, cv2.COLOR_RGB2HSV) * massk
             # cv2.imshow("mask", imutils.resize(sign[:, :, 0], width=600))
 
-            hist = cv2.calcHist([sign[:, :, 0]], [0], None, [databins], [0, 256])
+            hist = cv2.calcHist([sign], [0], massk[:,:,0], [databins], [0, 256])
             #kdata = (hist / sum(hist))
-            e = entropy(hist, bins)
-            kdata = np.insert((hist / sum(hist)), bins,[e])
+
+            kdata = np.insert((hist / sum(hist)), len(hist),[entropy(hist, databins)])
 
             logodata.append(kdata)
-            #print ( entropy(hist, bins))
+            #print ( entropy(hist, numbins))
         criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 0.01)
         compactness, labelss, cent = cv2.kmeans(np.array(logodata), 1,None, criteria, 3,cv2.KMEANS_RANDOM_CENTERS)
         centers.append(cent)
-        #print(cent)
+        #print(cent[0,100])
         labels.append(os.path.splitext(ff)[0])
         i +=1
 
-    #    plt.plot(hist)
-    #    plt.xlim([0, databins])
-    #plt.show()
+        #plt.plot(cent[0])
+        #plt.xlim([0, databins])
+        #plt.show()
     return centers,labels
 
 if __name__ == "__main__":
@@ -173,8 +178,9 @@ if __name__ == "__main__":
     #      0.0000000e+00, 0.0000000e+00, 0.0000000e+00, 0.0000000e+00, 0.0000000e+00,
     #      2.2882162e+05]
     # ])
-
+    print("Learning...")
     centers,names = learn('vision_logos',bins)
+    print("Done")
 
     while True:
 
@@ -219,7 +225,7 @@ if __name__ == "__main__":
             #plt.show()
 
             #kdata = (hist/sum(hist))
-            kdata = np.insert((hist/sum(hist)),bins,[entropy(hist,bins)])
+            kdata = np.insert((hist/sum(hist)),len(hist),[entropy(hist,bins)])
 
             imin =0
             min= 1000000

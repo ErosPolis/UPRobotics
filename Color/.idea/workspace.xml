@@ -15,20 +15,21 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LogoDetect.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LogoDetect.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/LogoDetect.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="185" column="34" lean-forward="true" selection-start-line="185" selection-start-column="34" selection-end-line="185" selection-end-column="34" />
+            <state relative-caret-position="267">
+              <caret line="212" column="27" lean-forward="false" selection-start-line="212" selection-start-column="27" selection-end-line="212" selection-end-column="27" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
-                <element signature="e#2728#2748#0" expanded="false" />
+                <element signature="e#1209#1383#0" expanded="false" />
+                <element signature="e#2880#2900#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="detect_color.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="detect_color.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Unused/detect_color.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1122">
@@ -39,12 +40,24 @@
         </entry>
       </file>
       <file leaf-file-name="borrarkmeans.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/borrarkmeans.py">
+        <entry file="file://$PROJECT_DIR$/Unused/borrarkmeans.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
               <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sdf.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Unused/sdf.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="14" lean-forward="true" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -59,6 +72,12 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>bins</find>
+      <find>mask</find>
+    </findStrings>
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -72,6 +91,9 @@
         <option value="$PROJECT_DIR$/Unused/FeatureMatcher.py" />
         <option value="$PROJECT_DIR$/Unused/detect_color.py" />
         <option value="$PROJECT_DIR$/borrarkmeans.py" />
+        <option value="$PROJECT_DIR$/vision_logos/Corrosive8/borrar.py" />
+        <option value="$PROJECT_DIR$/vision_logos/Flamablesolid4/sdf.py" />
+        <option value="$PROJECT_DIR$/Unused/sdf.py" />
         <option value="$PROJECT_DIR$/LogoDetect.py" />
       </list>
     </option>
@@ -121,20 +143,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Color" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Color" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Unused" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -152,32 +160,16 @@
     </option>
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\usuario\Documents\8_semestre\Robotica\repo\UPRobotics\Color\Unused" />
       <recent name="C:\Users\usuario\Documents\8_semestre\Robotica\repo\UPRobotics\Color" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\usuario\Documents\8_semestre\Robotica\repo\UPRobotics\Color\Unused" />
       <recent name="C:\Users\usuario\Documents\8_semestre\Robotica\repo\UPRobotics\Color" />
     </key>
   </component>
   <component name="RunManager" selected="Python.LogoDetect">
-    <configuration default="false" name="FeatureMatcher (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Color" />
-      <option name="SCRIPT_NAME" value="C:\Users\usuario\Documents\8_semestre\Robotica\repo\UPRobotics\Color\Unused\FeatureMatcher.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
     <configuration default="false" name="LogoDetect" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -195,40 +187,6 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="detect_color (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Unused" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Color" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Unused/detect_color.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="FeatureMatcher" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Unused" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Color" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Unused/FeatureMatcher.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
     <configuration default="false" name="borrarkmeans" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -241,7 +199,58 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Color" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/borrarkmeans.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\usuario\Documents\8_semestre\Robotica\repo\UPRobotics\Color\Unused\borrarkmeans.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="borrar" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/vision_logos/Corrosive8" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Color" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/vision_logos/Corrosive8/borrar.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="sdf" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/vision_logos/Flamablesolid4" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Color" />
+      <option name="SCRIPT_NAME" value="C:\Users\usuario\Documents\8_semestre\Robotica\repo\UPRobotics\Color\Unused\sdf.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="sdf (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Unused" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Color" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Unused/sdf.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -381,19 +390,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.FeatureMatcher (1)" />
-      <item index="1" class="java.lang.String" itemvalue="Python.LogoDetect" />
-      <item index="2" class="java.lang.String" itemvalue="Python.detect_color (1)" />
-      <item index="3" class="java.lang.String" itemvalue="Python.FeatureMatcher" />
-      <item index="4" class="java.lang.String" itemvalue="Python.borrarkmeans" />
+      <item index="0" class="java.lang.String" itemvalue="Python.LogoDetect" />
+      <item index="1" class="java.lang.String" itemvalue="Python.borrarkmeans" />
+      <item index="2" class="java.lang.String" itemvalue="Python.borrar" />
+      <item index="3" class="java.lang.String" itemvalue="Python.sdf" />
+      <item index="4" class="java.lang.String" itemvalue="Python.sdf (1)" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.LogoDetect" />
-        <item index="1" class="java.lang.String" itemvalue="Python.borrarkmeans" />
-        <item index="2" class="java.lang.String" itemvalue="Python.FeatureMatcher" />
-        <item index="3" class="java.lang.String" itemvalue="Python.detect_color (1)" />
-        <item index="4" class="java.lang.String" itemvalue="Python.FeatureMatcher (1)" />
+        <item index="1" class="java.lang.String" itemvalue="Python.sdf (1)" />
+        <item index="2" class="java.lang.String" itemvalue="Python.sdf" />
+        <item index="3" class="java.lang.String" itemvalue="Python.borrar" />
+        <item index="4" class="java.lang.String" itemvalue="Python.borrarkmeans" />
       </list>
     </recent_temporary>
   </component>
@@ -452,32 +461,12 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/LogoDetect.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <element signature="e#2728#2748#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/borrarkmeans.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LogoDetect.py">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="833">
           <caret line="54" column="32" lean-forward="false" selection-start-line="54" selection-start-column="32" selection-end-line="54" selection-end-column="32" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
-            <element signature="e#2728#2748#0" expanded="false" />
+            <element signature="e#1209#1383#0" expanded="false" />
+            <element signature="e#2880#2900#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -610,7 +599,8 @@
           <caret line="54" column="8" lean-forward="false" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
-            <element signature="e#2728#2748#0" expanded="false" />
+            <element signature="e#1209#1383#0" expanded="false" />
+            <element signature="e#2880#2900#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -629,7 +619,8 @@
           <caret line="54" column="32" lean-forward="false" selection-start-line="54" selection-start-column="32" selection-end-line="54" selection-end-column="32" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
-            <element signature="e#2728#2748#0" expanded="false" />
+            <element signature="e#1209#1383#0" expanded="false" />
+            <element signature="e#2880#2900#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -737,6 +728,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="232">
           <caret line="3345" column="4" lean-forward="false" selection-start-line="3345" selection-start-column="4" selection-end-line="3345" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -780,7 +772,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/borrarkmeans.py">
+    <entry file="file://$PROJECT_DIR$/seniales.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision_logos/Corrosive8/borrar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="14" lean-forward="true" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Unused/sdf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="14" lean-forward="true" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Unused/borrarkmeans.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
@@ -790,9 +805,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/seniales.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
+    <entry file="file://$PROJECT_DIR$/LogoDetect.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="212" column="27" lean-forward="false" selection-start-line="212" selection-start-column="27" selection-end-line="212" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#1209#1383#0" expanded="false" />
+            <element signature="e#2880#2900#0" expanded="false" />
+          </folding>
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Unused/detect_color.py">
@@ -800,17 +822,6 @@
         <state relative-caret-position="1122">
           <caret line="71" column="29" lean-forward="true" selection-start-line="71" selection-start-column="29" selection-end-line="71" selection-end-column="29" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LogoDetect.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="185" column="34" lean-forward="true" selection-start-line="185" selection-start-column="34" selection-end-line="185" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <element signature="e#2728#2748#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
