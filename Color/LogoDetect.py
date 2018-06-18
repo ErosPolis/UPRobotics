@@ -101,7 +101,8 @@ if __name__ == "__main__":
     sd = ShapeDetector()
     ratio = 0
     bins = 100
-    entropyImp=100000
+    minimError = 0.7
+
     # names = np.array([
     #     'Corrosive8',
     #     'DangerousWhenWet4',
@@ -185,11 +186,11 @@ if __name__ == "__main__":
     while True:
 
 
-        #ret, image=cam.read()
-        image = cv2.imread('indice.jpg')
+        ret, image=cam.read()
+        #image = cv2.imread('indice.jpg')
 
         resized = imutils.resize(image, width=600)
-        #cv2.imshow("wut",resized)
+        #cv2.imshow("Camara",resized)
         if(ratio==0):
             ratio = image.shape[0] / float(resized.shape[0])
         blurred = cv2.GaussianBlur(resized, (3, 3), 0)
@@ -245,7 +246,7 @@ if __name__ == "__main__":
                     min = d
                     imin=i
                 i+=1
-            if(min<1000):
+            if(min<minimError):
                 print(names[imin])
                 print(min)
                 cv2.waitKey(3000)
@@ -254,7 +255,7 @@ if __name__ == "__main__":
 
 
 
-        cv2.imshow("Image", imutils.resize(image, width=600))
+        cv2.imshow("Camara", imutils.resize(image, width=600))
         cv2.waitKey(20)
 
 
