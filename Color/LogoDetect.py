@@ -17,7 +17,11 @@ def getconthist(contour,image,numbins):
 
     sign = cv2.cvtColor(image, cv2.COLOR_RGB2HSV) * mask
 
-    cv2.imshow("mask", imutils.resize(image*mask, width=600))
+    stain = np.zeros((len(image), len(image[0]), 3), np.uint8)
+    stainn = mask[:, :, 0] != 1
+    stain[stainn] = (1, 1, 1)
+
+    #cv2.imshow("mask", imutils.resize(image*mask, width=600))
     #cv2.imshow("mask2", imutils.resize(cv2.cvtColor(image, cv2.COLOR_RGB2HSV)[:, :, 1], width=600))
     #cv2.imshow("mask3", imutils.resize(cv2.cvtColor(image, cv2.COLOR_RGB2HSV)[:, :, 2], width=600))
 
@@ -32,7 +36,7 @@ def getconthist(contour,image,numbins):
     #plt.xlim([0, numbins])
     #plt.show()
 
-    return hist
+    return hist,stain,imutils.resize(image*mask, width=600)
 
 def entropy(hist,numbins):
     prob = hist/numbins
@@ -182,18 +186,25 @@ if __name__ == "__main__":
     print("Learning...")
     centers,names = learn('vision_logos',bins)
     print("Done")
-
+    stains = []
     while True:
 
 
         ret, image=cam.read()
-        #image = cv2.imread('indice.jpg')
+        #image = cv2.imread('seniales.png')
+        image2 = image
+        if(len(stains) == 0):
+            stains = np.uint8(np.ones(image.shape))
+        else:
+            image= stains*image
+            #cv2.imshow("Camara", image)
 
         resized = imutils.resize(image, width=600)
-        #cv2.imshow("Camara",resized)
+
         if(ratio==0):
             ratio = image.shape[0] / float(resized.shape[0])
         blurred = cv2.GaussianBlur(resized, (3, 3), 0)
+
         edged = cv2.Canny(blurred, 50, 100, 255)
         #cv2.imshow("ss", edged)
 
@@ -214,9 +225,10 @@ if __name__ == "__main__":
             if shape is not "square":
                 continue
 
-            #print(area)
-            hist = getconthist(c,image,bins)
-            #print(hist)
+            hist, stain, selec = getconthist(c,image,bins)
+            stains= stains*stain
+            #cv2.imshow("stains",imutils.resize(stains, width=600))
+
             #plt.figure()
             #plt.xlabel("Bins")
             #plt.ylabel("# of Pixels")
@@ -249,13 +261,19 @@ if __name__ == "__main__":
             if(min<minimError):
                 print(names[imin])
                 print(min)
-                cv2.waitKey(3000)
+                cv2.imshow("Found",selec)
+                if(cv2.waitKey(3000)==13):
+                    stains = np.ones(image.shape)
+
+        if (cv2.waitKey(20) == 13):
+            stains = np.uint8(np.ones(image.shape))
 
 
 
 
 
-        cv2.imshow("Camara", imutils.resize(image, width=600))
-        cv2.waitKey(20)
+        cv2.imshow("Camara", imutils.resize(image2, width=600))
+        #cv2.imshow("Stained Camera", imutils.resize(image, width=600))
+
 
 
